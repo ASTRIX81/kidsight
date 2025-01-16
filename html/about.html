@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אודות החברה - KidSight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <style>
+        .section-title {
+            font-size: 1.8em; /* גודל גופן לכותרת משנה */
+            color: #3498db; /* צבע טקסט כחול */
+            margin-top: 30px; /* מרווח עליון */
+            margin-bottom: 15px; /* מרווח תחתון */
+            border-bottom: 2px solid #3498db; /* קו תחתון בכותרת משנה בצבע כחול */
+            display: inline-block; /* הצגת הכותרת כרכיב שורה */
+            padding-bottom: 5px; /* ריווח פנימי תחתון */
+        }
+        .highlight {
+            background-color: #ffdd59; /* צבע רקע צהוב בולט */
+            padding: 3px 8px; /* ריווח פנימי מסביב */
+            border-radius: 5px; /* עיגול פינות */
+        }
+    
+        .icon {
+            color: #ffdd59; /* צבע צהוב לאייקונים */
+            font-size: 1.2em; /* גודל גופן לאייקונים */
+            margin-right: 5px; /* מרווח מימין */
+        }
+    </style>    
+</head>
+<body>
+    <!-- תפריט ניווט -->
+    <div class="content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand mx-auto" href="index.html">KidSight</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">דף הבית</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="about.html">אודות החברה</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html">מוצרים</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">מידע אישי</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">יצירת קשר</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+       <!-- תוכן ראשי -->
+       <div class="container mt-5">
+        <div class="content">
+            <h1>אודות KidSight</h1>
+            
+            <h2 class="section-title">חזון החברה</h2>
+            <p>KidSight הוקמה בשנת 2005 מתוך <span class="highlight">חזון שאפתני</span> לספק פתרונות טכנולוגיים מתקדמים לבטיחות ילדים ברכבים. מחויבות לאיכות, חדשנות ויכולת להתאים את הפתרונות לצורכי הלקוחות בצורה אישית ומדויקת.</p>
+            
+            <h2 class="section-title">היסטוריה והישגים</h2>
+            <p>בשנת 2007, הציגה KidSight את המוצר הראשון שלה – <span class="highlight">מערכת לזיהוי ילדים ברכב</span>. המערכת התקבלה בשווקים הבינלאומיים בהצלחה רבה והפכה לנקודת ציון בתולדות החברה. מאז, KidSight ממשיכה לשלב טכנולוגיות מתקדמות במוצריה.</p>
+            
+            <h2 class="section-title">מחקר ופיתוח</h2>
+            <p>KidSight משקיעה רבות במחקר ופיתוח כדי ליצור מוצרים אמינים ומתקדמים, הכוללים <i class="bi bi-camera-video icon"></i> מצלמות מתקדמות ו<i class="bi bi-sensor icon"></i> חיישנים רגישים לניתוח נתונים בזמן אמת. הפתרונות פועלים גם בתנאים קשים כגון טמפרטורות גבוהות ורעש חזק.</p>
+            
+            <h2 class="section-title">ערכים מרכזיים</h2>
+            <ul>
+                <li><i class="bi bi-check-circle icon"></i> חדשנות ויצירתיות</li>
+                <li><i class="bi bi-check-circle icon"></i> מצוינות ואמינות</li>
+                <li><i class="bi bi-check-circle icon"></i> שירות אישי מותאם</li>
+            </ul>
+
+            <h2 class="section-title">מוצרים ופתרונות</h2>
+            <p>KidSight מספקת פתרונות בטיחות גם לרכבים פרטיים וגם לציבוריים ומוסדות חינוך. מטרתנו היא <span class="highlight">לשפר את איכות החיים</span> של המשתמשים ולהבטיח את בטיחותם של ילדים בסביבות שונות.</p>
+        </div>
+    </div>
+    </div>
+    <!-- Footer -->
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="mb-3 mb-md-0 text-white">© 2024 Company, Inc</span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-twitter" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-instagram" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-facebook" style="font-size: 24px;"></i></a></li>
+        </ul>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

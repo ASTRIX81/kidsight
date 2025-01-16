@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מוצרים - KidSight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <style>
+        .product-card {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+        .product-card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- תפריט ניווט -->
+    <div class="content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand mx-auto" href="index.html">KidSight</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">דף הבית</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">אודות החברה</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="products.html">מוצרים</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">מידע אישי</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">יצירת קשר</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- תוכן ראשי -->
+        <div class="container mt-5">
+            <div class="content">
+                <h1>מוצרים</h1>
+                <p>אנו מציעים מגוון מוצרים טכנולוגיים לשמירה על בטיחותם של ילדים ברכבים.</p>
+                
+                <!-- כרטיסיות מוצרים -->
+                <div class="row">
+                    <!-- מוצר 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <img src="/img/Car_Camera_Model_Duel.webp" class="card-img-top" alt="מוצר 1">
+                            <div class="card-body">
+                                <h5 class="card-title">מערכת זיהוי ילדים ברכב</h5>
+                                <p class="card-text">מערכת חדשנית לזיהוי נוכחות ילדים ברכב, למניעת שכחה ותאונות.</p>
+                                <a href="#" class="btn btn-primary">לפרטים נוספים</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- מוצר 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <img src="/img/BlackBox-Car-Camera.webp" class="card-img-top" alt="מוצר 2">
+                            <div class="card-body">
+                                <h5 class="card-title">מצלמת בטיחות חכמה</h5>
+                                <p class="card-text">מצלמה עם חיישנים מתקדמים, לזיהוי תנועות וחריגות בזמן אמת.</p>
+                                <a href="#" class="btn btn-primary">לפרטים נוספים</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- מוצר 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <img src="/img/Car_Camera.webp" class="card-img-top" alt="מוצר 3">
+                            <div class="card-body">
+                                <h5 class="card-title">מערכת התרעת חום</h5>
+                                <p class="card-text">מערכת מתקדמת המתריעה על טמפרטורה גבוהה ומונעת סכנות חום.</p>
+                                <a href="#" class="btn btn-primary">לפרטים נוספים</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="mb-3 mb-md-0 text-white">© 2024 Company, Inc</span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-twitter" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-instagram" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-facebook" style="font-size: 24px;"></i></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

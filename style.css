@@ -1,0 +1,89 @@
+/* הגדרות בסיסיות למסמך */
+html, body {
+    height: 100%; /* גובה מלא למסמך */
+    margin: 0; /* הסרת רווחים חיצוניים */
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    direction: rtl; /* כיוון טקסט מימין לשמאל */
+    text-align: right; /* יישור טקסט לימין */
+    background-color: #f8f9fa; /* צבע רקע אפור בהיר */
+    overflow-x: hidden; /* מניעת גלילה אופקית */
+}
+
+/* קונטיינר ראשי */
+.content-wrapper {
+    flex: 1; /* הרחבת התוכן לגובה מלא */
+    display: flex;
+    flex-direction: column;
+    max-width: 100%; /* מניעת גלישה מעבר לרוחב המסך */
+}
+
+/* עיצוב התוכן */
+.content {
+    padding: 30px; /* ריווח פנימי סביב התוכן */
+    background-color: #ffffff; /* צבע רקע לבן */
+    border-radius: 10px; /* עיגול פינות התוכן */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* צל קל מסביב לתוכן */
+    margin: 20px auto; /* ריווח ויישור למרכז */
+    max-width: 800px; /* רוחב מקסימלי לתוכן */
+}
+
+/* עיצוב הפוטר */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    flex-shrink: 0; /* מונע מהפוטר להתכווץ */
+    background-color: #343a40; /* צבע רקע אפור כהה */
+    color: white; /* צבע טקסט לבן */
+}
+
+/* עיצוב התפריט */
+.navbar, footer {
+    background-color: #343a40; /* צבע רקע אפור כהה */
+    color: white; /* צבע טקסט לבן */
+}
+
+/* עיצוב רשימות */
+ul {
+    list-style-type: none; /* הסרת סימני רשימה */
+    padding-left: 0; /* הסרת רווח פנימי משמאל */
+}
+
+ul li {
+    padding: 8px 0; /* ריווח פנימי עליון ותחתון לפריטי רשימה */
+    font-size: 1.1em; /* גודל גופן לפריטי רשימה */
+}
+
+ul li i {
+    margin-right: 8px; /* ריווח מימין לאייקונים בתוך רשימה */
+}
+
+/* עיצוב טקסט */
+p, li {
+    color: #4d4d4d; /* צבע טקסט אפור בינוני */
+    line-height: 1.8; /* גובה שורה מוגדל לקריאות */
+    font-size: 1.1em; /* גודל גופן לטקסט */
+}
+
+.content h1 {
+    font-size: 2.5em; /* גודל גופן של כותרת ראשית */
+    color: #2c3e50; /* צבע טקסט אפור כהה */
+    text-align: center; /* מיקום הכותרת במרכז */
+    margin-bottom: 20px; /* מרווח תחתון לכותרת */
+    border-bottom: 3px solid #3498db; /* קו תחתון לכותרת בצבע כחול */
+    padding-bottom: 10px; /* ריווח פנימי תחתון לכותרת */
+}
+
+h1, h2, h3, p {
+    color: #343a40; /* צבע אפור כהה לכותרות ופסקאות */
+}
+
+/* אנימציה לאייקונים */
+.col-md-4 i:hover {
+    transform: scale(1.2); /* הגדלת האייקונים ב-20% בעת ריחוף */
+    transition: transform 0.3s ease; /* אנימציה חלקה של 0.3 שניות */
+}

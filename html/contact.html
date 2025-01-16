@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצירת קשר - KidSight</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <style>
+        button {
+            background-color: #343a40;
+            color: white;
+            transition: background-color 0.3s;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand mx-auto" href="index.html">KidSight</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">דף הבית</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">אודות החברה</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html">מוצרים</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">מידע אישי</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">יצירת קשר</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="content-wrapper">
+            <div class="container mt-5">
+                <div class="content">
+                    <h1>יצירת קשר</h1>
+                    <p>צרו איתנו קשר לפרטים נוספים ושאלות.</p>
+                    <p>ודברו איתנו במספר 0539193058</p>
+    
+                    <!-- טופס יצירת קשר -->
+                    <form>
+                        <div class="mb-3 position-relative">
+                            <label for="name" class="form-label">שם מלא</label>
+                            <div class="input-group">
+                                <span class="input-group-text bi bi-person-fill"></span>
+                                <input type="text" class="form-control" id="name" placeholder="הזן את שמך המלא">
+                            </div>
+                        </div>
+                        <div class="mb-3 position-relative">
+                            <label for="email" class="form-label">כתובת אימייל</label>
+                            <div class="input-group">
+                                <span class="input-group-text bi bi-envelope-fill"></span>
+                                <input type="email" class="form-control" id="email" placeholder="הזן את כתובת האימייל שלך">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">הודעה</label>
+                            <textarea class="form-control" id="message" rows="4" placeholder="כתוב את הודעתך כאן"></textarea>
+                        </div>
+    
+                        <!-- Radio Buttons -->
+                        <div class="mb-3">
+                            <label class="form-label">בחר סוג פניה:</label>
+                            <div>
+                                <input type="radio" id="inquiry" name="contactType" value="inquiry">
+                                <label for="inquiry">פניה כללית</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="support" name="contactType" value="support">
+                                <label for="support">תמיכה טכנית</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="complaint" name="contactType" value="complaint">
+                                <label for="complaint">תלונה</label>
+                            </div>
+                        </div>
+    
+                        <!-- Select with Options -->
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">בחר נושא:</label>
+                            <select class="form-select" id="subject">
+                                <option selected disabled>בחר נושא</option>
+                                <option value="product">מידע על מוצר</option>
+                                <option value="service">שירות לקוחות</option>
+                                <option value="technical">תמיכה טכנית</option>
+                                <option value="other">אחר</option>
+                            </select>
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary">שלח הודעה</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
+        <div class="col-md-4 align-items-center text-center">
+            <span class="mb-3 mb-md-0 text-white">© 2024 Company, Inc</span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-twitter" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-instagram" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-facebook" style="font-size: 24px;"></i></a></li>
+        </ul>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

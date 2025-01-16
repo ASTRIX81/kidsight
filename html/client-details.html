@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרטי לקוח - KidSight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <style>
+        .content-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+
+        #updateForm {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #stream {
+            width: 80%;
+            max-width: 600px;
+            border: 2px solid #000;
+            margin: 20px auto;
+            display: block;
+        }
+
+        #screenshotCanvas {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand mx-auto" href="index.html">KidSight</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">דף הבית</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">אודות החברה</a></li>
+                        <li class="nav-item"><a class="nav-link" href="products.html">מוצרים</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.html">מידע אישי</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">יצירת קשר</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <div class="content text-center">
+                <h1>פרטי לקוח</h1>
+                <div id="clientInfo" class="mt-4"></div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-danger" onclick="deleteClient()">מחק</button>
+                    <button class="btn btn-primary me-2" onclick="showUpdateForm()">עדכן פרטים</button>
+                </div>
+                <div id="motionImageContainer" class="text-center mt-4">
+                    <img id="motionImage" src=" alt="תנועה מזוהה" style="display: none; max-width: 100%; height: auto;">
+                </div>
+
+                <!-- שידור חי מהמצלמה -->
+                <h2 class="mt-5">שידור חי מהמצלמה</h2>
+                <img id="stream" src="" alt="ESP32-CAM Stream" crossorigin="anonymous">
+                <button class="btn btn-primary mt-3" onclick="takeScreenshot()">צלם מסך</button>
+                <button class="btn btn-success mt-3" id="saveButton" style="display: none;" onclick="saveScreenshot()">שמור תמונה</button>
+
+                <!-- מקום להצגת צילום המסך -->
+                <div id="screenshotContainer">
+                    <canvas id="screenshotCanvas"></canvas>
+                </div>
+
+                <!-- טופס לעדכון פרטי לקוח -->
+                <div id="updateForm">
+                    <h2>עדכון פרטים</h2>
+                    <form id="clientUpdateForm">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">שם מלא:</label>
+                            <input type="text" id="fullName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">מספר טלפון:</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">אימייל:</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="serialNumber" class="form-label">מספר סידורי:</label>
+                            <input type="text" id="serialNumber" class="form-control" required>
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="updateClient()">שמור</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideUpdateForm()">ביטול</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
+            <div class="col-md-4 d-flex align-items-center">
+                <span class="mb-3 mb-md-0 text-white">© 2024 Company, Inc</span>
+            </div>
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-twitter" style="font-size: 24px;"></i></a></li>
+                <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-instagram" style="font-size: 24px;"></i></a></li>
+                <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-facebook" style="font-size: 24px;"></i></a></li>
+            </ul>
+        </footer>
+
+        <!-- ספריות Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            // קונפיגורציית Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyCNeB6CqLZnPTEJ4v80nG3BvoIhipRK1oM",
+                authDomain: "kidsight-1c47b.firebaseapp.com",
+                databaseURL: "https://kidsight-1c47b-default-rtdb.europe-west1.firebasedatabase.app",
+                projectId: "kidsight-1c47b",
+                storageBucket: "kidsight-1c47b.appspot.com",
+                messagingSenderId: "644869114068",
+                appId: "1:644869114068:web:504edea565f2128615d341",
+                measurementId: "G-PJXKCVKH46"
+            };
+
+            // אתחול Firebase
+            const app = firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+
+            function fetchCamIP() {
+                const camIPRef = database.ref('camIp');
+                camIPRef.get()
+                    .then((snapshot) => {
+                        if (snapshot.exists()) {
+                            const camIP = snapshot.val();
+                            console.log("כתובת ה-IP שנשלפה מ-Firebase:", camIP);
+                            document.getElementById('stream').src = `http://${camIP}:81/stream`;
+                        } else {
+                            console.error('הנתיב camIp לא נמצא ב-Firebase.');
+                            alert('לא נמצאה כתובת IP ב-Firebase.');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('שגיאה בשליפת הנתונים מ-Firebase:', error);
+                    });
+            }
+
+            function loadClientData() {
+                const clientData = JSON.parse(localStorage.getItem('clientData'));
+                if (clientData) {
+                    document.getElementById('clientInfo').innerHTML = `
+                        <p><strong>שם מלא:</strong> ${clientData.fullName}</p>
+                        <p><strong>מספר טלפון:</strong> ${clientData.phone}</p>
+                        <p><strong>אימייל:</strong> ${clientData.email}</p>
+                        <p><strong>מספר סידורי של המוצר:</strong> ${clientData.serialNumber}</p>
+                    `;
+                } else {
+                    document.getElementById('clientInfo').innerHTML = '<p>אין נתונים להצגה.</p>';
+                }
+            }
+
+            function deleteClient() {
+                localStorage.removeItem('clientData');
+                document.getElementById('clientInfo').innerHTML = '<p>הנתונים נמחקו בהצלחה.</p>';
+            }
+
+
+            function showUpdateForm() {
+                const clientData = JSON.parse(localStorage.getItem('clientData'));
+                if (clientData) {
+                    document.getElementById('fullName').value = clientData.fullName || '';
+                    document.getElementById('phone').value = clientData.phone || '';
+                    document.getElementById('email').value = clientData.email || '';
+                    document.getElementById('serialNumber').value = clientData.serialNumber || '';
+                }
+                document.getElementById('updateForm').style.display = 'block';
+            }
+
+            function hideUpdateForm() {
+                document.getElementById('updateForm').style.display = 'none';
+            }
+
+            function updateClient() {
+                const fullName = document.getElementById('fullName').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const serialNumber = document.getElementById('serialNumber').value.trim();
+
+                if (!fullName || !phone || !email || !serialNumber) {
+                    alert("יש למלא את כל השדות.");
+                    return;
+                }
+
+                const updatedData = { fullName, phone, email, serialNumber };
+                localStorage.setItem('clientData', JSON.stringify(updatedData));
+                loadClientData();
+                hideUpdateForm();
+                alert("הנתונים עודכנו בהצלחה!");
+            }
+            function fetchCamIP() {
+                const camIP = "172.20.10.2"; // עדכן לפי הכתובת של המצלמה שלך
+                document.getElementById('stream').src = `http://${camIP}:81/stream`;
+            }
+
+            // פונקציה לצילום מסך
+            function takeScreenshot() {
+                const videoElement = document.getElementById('stream');
+                const canvas = document.getElementById('screenshotCanvas');
+                const context = canvas.getContext('2d');
+
+                // הגדר מימדים של הקנבס
+                canvas.width = videoElement.width;
+                canvas.height = videoElement.height;
+
+                // צייר את התמונה על הקנבס
+                context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+                // הצג את כפתור שמירת התמונה
+                const saveButton = document.getElementById('saveButton');
+                saveButton.style.display = 'inline-block';
+
+                alert('צילום המסך הושלם!');
+            }
+
+            // פונקציה לשמירת צילום המסך
+            function saveScreenshot() {
+                const canvas = document.getElementById('screenshotCanvas');
+                const link = document.createElement('a');
+                link.download = 'screenshot.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+
+
+
+            window.onload = () => {
+                loadClientData();
+                fetchCamIP();
+            };
+            // פונקציה לטיפול במצב התנועה
+            function monitorMotionStatus() {
+                const motionStatusRef = database.ref('motion/motionStatus');
+        
+                motionStatusRef.on('value', (snapshot) => {
+                    const motionStatus = snapshot.val();
+            
+                if (motionStatus === 1) {
+                // אם הערך 1, הצגת התמונה
+                    document.getElementById('motionImage').style.display = 'block';
+                }       else {
+                    // אם הערך 0, הסתרת התמונה
+                    document.getElementById('motionImage').style.display = 'none';
+                }
+            }, (error) => {
+            console.error("שגיאה בשליפת המידע מ-Firebase:", error);
+            });
+        }
+
+            window.onload = () => {
+            loadClientData();
+            fetchCamIP();
+            monitorMotionStatus(); // התחלת מעקב אחר שינויים ב-motionStatus
+        };
+        </script>
+    </div>
+</body>
+</html>

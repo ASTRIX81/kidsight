@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הרשמה למערכת - KidSight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand mx-auto" href="index.html">KidSight</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">דף הבית</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">אודות החברה</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html">מוצרים</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">מידע אישי</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">יצירת קשר</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container mt-5">
+            <div class="content">
+                <h1>הרשמה למערכת KidSight</h1>
+                <form id="registrationForm" onsubmit="registerClient(event)">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">שם מלא</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">מספר טלפון</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">אימייל</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">סיסמה</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="serialNumber" class="form-label">מספר סידורי של המוצר</label>
+                        <input type="text" class="form-control" id="serialNumber" name="serialNumber" required>
+                    </div>
+                    <div id="alert" class="alert mt-3" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary">הרשמה</button>
+                    <a class="btn btn-primary" href="login.html">התחברות</a>
+                    <button id="googleSignIn" class="btn btn-danger">
+                        <i class="bi bi-google"></i> התחבר עם Google
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="mb-3 mb-md-0 text-white">© 2024 Company, Inc</span>
+        </div>
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-twitter" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-instagram" style="font-size: 24px;"></i></a></li>
+            <li class="ms-3"><a class="text-white" href="#"><i class="bi bi-facebook" style="font-size: 24px;"></i></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNeB6CqLZnPTEJ4v80nG3BvoIhipRK1oM",
+            authDomain: "kidsight-1c47b.firebaseapp.com",
+            databaseURL: "https://kidsight-1c47b-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "kidsight-1c47b",
+            storageBucket: "kidsight-1c47b.appspot.com",
+            messagingSenderId: "644869114068",
+            appId: "1:644869114068:web:504edea565f2128615d341",
+            measurementId: "G-PJXKCVKH46"
+        };
+    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // יצירת פרוביידר התחברות של Google
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const auth = firebase.auth();
+
+        // פונקציה לכניסה עם Google
+        const signInWithGoogle = async () => {
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+
+                // פרטי המשתמש מ-Google
+                const fullName = user.displayName;
+                const email = user.email;
+                const phone = user.phoneNumber || "לא הוזן";
+                const uid = user.uid;
+
+                // שמירת הפרטים במסד הנתונים
+                await firebase.database().ref('clients/' + uid).set({
+                    fullName,
+                    email,
+                    phone,
+                    serialNumber: "לא הוזן",
+                });
+
+                // הודעה למשתמש
+                alert(`שלום ${fullName}, התחברת בהצלחה עם Google!`);
+
+                // הפנייה לדף הבית
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error("שגיאה בהתחברות עם Google:", error.message);
+                alert("התרחשה שגיאה בהתחברות עם Google. אנא נסה שוב.");
+            }
+        };
+
+        // הוספת אירוע לכפתור התחברות
+        document.getElementById("googleSignIn").addEventListener("click", signInWithGoogle);
+
+        // Function to register client
+        async function registerClient(event) {
+            event.preventDefault();
+    
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const emailInput = document.getElementById('email').value;
+            const passInput = document.getElementById('password').value;
+            const serialNumber = document.getElementById('serialNumber').value;
+    
+            if (passInput.length < 6) {
+                document.getElementById("alert").classList.add('alert-danger');
+                document.getElementById("alert").innerText = "הסיסמה חייבת להיות באורך של לפחות 6 תווים";
+                document.getElementById("alert").style.display = "block";
+                return;
+            }
+    
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(emailInput, passInput);
+                const user = userCredential.user;
+                await firebase.database().ref('clients/' + user.uid).set({
+                    fullName,
+                    phone,
+                    email: emailInput,
+                    serialNumber
+                });
+    
+                // Send SMS after successful registration
+                await sendSms(fullName, phone);
+    
+                document.getElementById("alert").classList.remove('alert-danger');
+                document.getElementById("alert").classList.add('alert-success');
+                document.getElementById("alert").innerText = "הרשמה בוצעה בהצלחה!";
+                document.getElementById("alert").style.display = "block";
+    
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 2000);
+            } catch (error) {
+                document.getElementById("alert").classList.add('alert-danger');
+                document.getElementById("alert").innerText = error.message;
+                document.getElementById("alert").style.display = "block";
+            }
+        }
+
+        // Function to send SMS
+        async function sendSms(fullname, phone) {
+            // כאן ניתן להוסיף את הקוד לשליחת SMS
+            console.log(`SMS נשלח אל ${phone}: שלום ${fullname}`);
+        }
+    </script>
+</body>
+</html>
